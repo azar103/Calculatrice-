@@ -1,0 +1,103 @@
+
+class DisplayInput extends React.Component{
+   constructor(props){
+     super(props);
+   }
+  render(){
+    return(
+
+         <div className="header row" id="display">
+            <h1 className="text-right "><span id="number">{this.props.value}</span></h1>
+          </div>
+    );
+  }
+  
+}
+class CalculInput extends React.Component{
+  render(){
+    return(
+    <div>
+         <div className="row">
+        <div className="col-xs-6" id="clear" onClick={this.props.clear}>AC</div>
+        <div className="col-xs-3" id="divide" onClick={this.props.change}>/</div>   
+        <div className="col-xs-3" id="divide" onClick={this.props.change}>*</div>    
+      
+      </div>
+    <div className="body row">
+            <div className="col-xs-9">
+              <div className="row">
+                <div className="col-xs-4" id="one" onClick={this.props.change}>1</div>
+                <div className="col-xs-4" id="two" onClick={this.props.change} >2</div>
+                <div className="col-xs-4" id="three" onClick={this.props.change} >3</div>
+              </div>
+              <div className="row">
+               <div className="col-xs-4" id="four" onClick={this.props.change} >4</div>
+                <div className="col-xs-4" id="five" onClick={this.props.change} >5</div>
+                <div className="col-xs-4" id="six" onClick={this.props.change} >6</div>
+              </div>
+              <div className="row">
+              <div className="col-xs-4" id="seven" onClick={this.props.change}>7</div>
+                <div className="col-xs-4" id="eight" onClick={this.props.change}>8</div>
+                <div className="col-xs-4" id="nine" onClick={this.props.change}>9</div>
+              </div>
+              <div className="row">
+              <div className="col-xs-6" id="zero" onClick={this.handleChange}>0</div>
+                <div className="col-xs-6" id="decimal" onClick={this.props.change}>.</div>
+              </div>
+            </div>
+            <div className="col-xs-3">
+              <div className="row">
+                 <div className="col-xs-12" id="substract" onClick={this.handleChange}>-               </div>
+                     <div className="col-xs-12" id="add" onClick={this.props.change}>+                 </div>
+              <div className="col-xs-12" id="equal" onClick={this.props.change}>=</div>
+              </div>
+           
+   
+            </div>
+            
+            
+           </div>
+     
+      </div>
+    );
+     
+    
+      
+  }
+}
+
+
+class Calculator extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      value: 0,
+      data: []
+    };
+    this.handleChange = this.handleChange.bind(this); 
+    this.handleClear = this.handleClear.bind(this);
+  }
+  
+  handleChange(event){
+    this.setState({
+      value: event.target.textContent
+    });
+  }
+  handleClear(){
+    this.setState({
+      value: 0,
+      data:[]
+    })
+  }
+  render(){
+    return(
+       <div className="container">
+          <DisplayInput value={this.state.value} />
+          <CalculInput change={this.handleChange} clear={this.handleClear} />
+      </div>
+    );
+  }
+  
+}
+
+ReactDOM.render(<Calculator />,document.getElementById('root'));
